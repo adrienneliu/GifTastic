@@ -1,22 +1,30 @@
 $(document).submit(function () {
     event.preventDefault();
 
-    var foodSearch; 
 
+    var food = ["spaghetti", "fried chicken", "sushi"];
+
+    function displayFood() {
+    var food = $(this).attr("data-name");
+    var foodSearch; 
+//Storing the value in the search input
     var foodSearch = $("#foodSearch").val();
+
     console.log(foodSearch);
 
-
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=5"
-
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=5";
+console.log(queryURL);
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         console.log(response);
+    console.log(food);
+        
 
     }) 
-
+    }
+    displayFood();
 });
 
 //dynamically create buttons 
