@@ -5,7 +5,7 @@ $(document).submit(function () {
     var food = ["spaghetti", "fried chicken", "sushi"];
 
     function displayFood() {
-    var food = $(this).attr("data-name");
+  
     var foodSearch; 
 //Storing the value in the search input
     var foodSearch = $("#foodSearch").val();
@@ -13,17 +13,48 @@ $(document).submit(function () {
     console.log(foodSearch);
 
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=5";
-console.log(queryURL);
+    console.log(queryURL);
+
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         console.log(response);
-    console.log(food);
-        
 
+        var results = response.data; 
+        for (var i = 0; i<foodSearch.length; i++) {
+        
+        var foodDiv = $("<div>")
+        var foodP = $("<p>")
+        var foodURL = results[i].images.fixed_height.url;
+        var foodImage = $("<img>"); 
+
+        foodImage.attr("src", foodURL);
+        foodImage.attr("alt", "food")
+        
+        foodDiv.append(foodP);
+        foodDiv.append(foodImage);
+        $(".foodImage").prepend(foodDiv);
+    }
     }) 
     }
+
+    function renderButtons() {
+        $("#foodbuttons").empty();
+
+        for (var i = 0; i<foodSearch.length; i++) {
+        var newButton = $("<button>");
+        newButton.addClass("food-button");
+        newButton.attr("data-name", foodSearch[i]);
+        newButton.text(foodSearch[i]);
+        $("#foodbuttons").append(newButton);
+        }
+
+    }
+
+
+
+    renderButtons();
     displayFood();
 });
 
