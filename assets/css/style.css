@@ -1,10 +1,38 @@
 #foodbuttons {
-    /* background-color: pink; */
-    color: black;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-image: url("https://images.sampletemplates.com/wp-content/uploads/2015/07/07140933/Blank-Menu-Template1.jpg");
     background-size: 100%;
     background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Courgette', cursive;
+    font-family: 'Old Standard TT', serif;
+
+}
+
+
+#addfood {
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Courgette', cursive;
+    font-size: 47px;
+    text-align: center;
+}
+
+#foodform {
+    font-family: 'Poppins', sans-serif;
+    right: 5%;
+    margin-top: -5%;
+    padding: 10%;
+    position: fixed;
+}
+
+#foodSearch {
+    height: 50px;
 }

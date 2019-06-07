@@ -1,11 +1,10 @@
-var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich", "cake", "dumpling", "curry", "lassi", "ice cream", "pudding", "taco"];
+var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich", "cake", "dumpling", "curry", "lassi", "ice cream", "pudding", "taco", "marshmallow"];
 renderButtons();
 
 // make the buttons add to the button area
 function renderButtons() {
-    console.log('renderButtons');
+    
     $("#foodbuttons").empty();
-
     for (var i = 0; i < foodshown.length; i++) {
         var newButton = $("<button>");
         newButton.addClass("fooddisplay");
@@ -13,17 +12,16 @@ function renderButtons() {
         newButton.text(foodshown[i]);
         //alert(newButton);
         $("#foodbuttons").append(newButton);
-        console.log('for renderButtons');
+        
     }
 }
-
 //when submit button is clicked, use keyword value to create button
 function addButton() {
     event.preventDefault();
     var foodFound = $("#foodSearch").val().trim();
 
     foodshown.push(foodFound);
-    console.log("addButton");
+  
     renderButtons();
 
 }
@@ -31,7 +29,6 @@ function addButton() {
 // call on giphy for keyword and corresponding rating
 // still need to clear page
 function displayFood() {
-    console.log('displayFood');
     $(".divfoodImage").empty();
     var foodSearch;
     //Storing the value in the search input
@@ -44,12 +41,12 @@ function displayFood() {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
+        // console.log(response);
 
         var results = response.data;
         for (var j = 0; j < results.length; j++) {
 
-            var foodDiv = $("<div>");
+            var foodDiv = $("<p>");
             var foodP = $("<p>");
             var foodStill = results[j].images.fixed_height_still.url;
             var foodMove = results[j].images.fixed_height.url;
@@ -68,18 +65,17 @@ function displayFood() {
 
             foodDiv.append(foodP);
             foodDiv.append(foodImage);
-            $(".divfoodImage").prepend(foodDiv);
+            $(".divfoodImage").append(foodDiv);
 
             var rating = results[j].rating;
             var ratingText = $("<p>").text("Rating: " + rating);
-            foodDiv.prepend(ratingText);
+            foodDiv.append(ratingText);
         }
     })
 }
 
 //changes the state of images so that on click, will move/stop
 function imageAnimate() {
-    console.log('Animate');
     var state = $(this).attr("data-state");
 
 

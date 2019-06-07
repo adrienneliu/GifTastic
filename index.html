@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    
-    <title>What's for Lunch</title>  
 
+    <title>What's for Lunch</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Old+Standard+TT|Poppins&display=swap" rel="stylesheet">
 </head>
 
 
 <body>
-    
-    <h1>What's on the Menu?</h1>
-  
-    <div id="foodbuttons"></div>
+    <div class="container">
+        <h1>What's on the Menu?</h1>
+    </div>
+    <div class="container" id="foodbuttons"></div>
     <form id="foodform">
         <label for="foodName">Search</label>
         <input type="text" id="foodSearch"><br><br>
-<!-- So that we can add more buttons -->
+        <!-- So that we can add more buttons -->
         <input type="submit" id="addfood" value="Add a Food">
+    </form>
 
-    
-    </form> 
+    <div class="divfoodImage container p-5 mr-5 mt-5"></div>
 
-    <div class="divfoodImage"></div>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- Added link to the jQuery Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Javascript-->
-<script src="assets/javascript/app.js"></script>
+
+    <!-- Javascript-->
+    <script src="assets/javascript/app.js"></script>
 
 </body>
+
 </html>
