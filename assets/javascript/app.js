@@ -1,6 +1,7 @@
-var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich"];
+var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich", "cake", "dumpling", "curry", "lassi", "ice cream", "pudding", "taco"];
 
 
+// make the buttons add to the button area
 function renderButtons() {
     $("#foodbuttons").empty();
 
@@ -15,6 +16,7 @@ function renderButtons() {
 
 }
 
+//when submit button is clicked, use keyword value to create button
 $("#add-food").on("click", function (event) {
     var foodSearch = $("#foodSearch").val().trim();
     foodshown.push(foodSearch);
@@ -22,47 +24,74 @@ $("#add-food").on("click", function (event) {
     console.log(foodval);
 })
 
-    function displayFood() {
+// call on giphy for keyword and corresponding rating
+// still need to clear page
+function displayFood() {
+    $(".divfoodImage").empty();
+    var foodSearch;
+    //Storing the value in the search input
+    var foodSearch = $(this).attr("data-name");
 
-        var foodSearch;
-        //Storing the value in the search input
-        var foodSearch = $(this).attr("data-name");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=2";
+    //console.log(queryURL);
 
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=10";
-        //console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
 
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
+        var results = response.data;
+        for (var j = 0; j < results.length; j++) {
 
-            var results = response.data;
-            for (var i = 0; i < results.length; i++) {
+            var foodDiv = $("<div>");
+            var foodP = $("<p>");
+            var foodStill = results[j].images.fixed_height_still.url;
+            var foodMove = results[j].images.fixed_height.url;
+            var foodImage = $("<img>");
 
-                              
 
-                var foodDiv = $("<div>");
-                var foodP = $("<p>");
-                var foodURL = results[i].images.fixed_height.url;
-                var foodImage = $("<img>");
+            foodImage.attr("src", foodStill);
+            foodImage.attr("alt", "delicious");
+            //original/default use this: 
+            foodImage.attr("data-still", foodStill);
+            //click use this
+            foodImage.attr("data-animate", foodMove)
+            //set the data state to still until clicked
+            foodImage.attr("data-state", "still");
+            foodImage.addClass("foodimg")
 
-                foodImage.attr("src", foodURL);
-                foodImage.attr("alt", "food");
+            foodDiv.append(foodP);
+            foodDiv.append(foodImage);
+            $(".divfoodImage").prepend(foodDiv);
 
-                foodDiv.append(foodP);
-                foodDiv.append(foodImage);
-                $(".foodImage").prepend(foodDiv);
+            var rating = results[j].rating;
+            var ratingText = $("<p>").text("Rating: " + rating);
+            foodDiv.prepend(ratingText);
+        }
+    })
+}
 
-                var rating = results[i].rating;
-                var ratingText = $("<p>").text("Rating: " + rating);
-                foodDiv.prepend(ratingText);
-            }
-        })
+//changes the state of images so that on click, will move/stop
+function imageAnimate() {
+    console.log('foodimg');
+    var state = $(this).attr("data-state");
+
+
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    } else  {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
     }
+    };
 
 
+
+// when food button is clicked, displayfood function happens and pulls photos from giphy
 $(document).on("click", ".foodSearch", displayFood);
+$(document).on("click", ".foodimg", imageAnimate);
 renderButtons();
 
 
