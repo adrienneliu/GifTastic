@@ -1,8 +1,9 @@
 var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich", "cake", "dumpling", "curry", "lassi", "ice cream", "pudding", "taco"];
-
+// var foodshown = [];
 
 // make the buttons add to the button area
 function renderButtons() {
+    console.log('renderButtons');
     $("#foodbuttons").empty();
 
     for (var i = 0; i < foodshown.length; i++) {
@@ -10,29 +11,37 @@ function renderButtons() {
         newButton.addClass("foodSearch");
         newButton.attr("data-name", foodshown[i]);
         newButton.text(foodshown[i]);
+        //alert(newButton);
         $("#foodbuttons").append(newButton);
-        console.log('renderButtons');
+        console.log('for renderButtons');
     }
 
 }
 
 //when submit button is clicked, use keyword value to create button
-$("#add-food").on("click", function (event) {
+function addButton () {
     var foodSearch = $("#foodSearch").val().trim();
+
     foodshown.push(foodSearch);
+    //alert('here' + foodshown)
+    console.log("addButton");
+    // var foodSearch = $("#foodSearch").val().trim();
+
+    // foodshown.push(foodSearch);
     renderButtons();
-    console.log(foodval);
-})
+  
+}
 
 // call on giphy for keyword and corresponding rating
 // still need to clear page
 function displayFood() {
+    console.log('displayFood');
     $(".divfoodImage").empty();
     var foodSearch;
     //Storing the value in the search input
     var foodSearch = $(this).attr("data-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=2";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=10";
     //console.log(queryURL);
 
     $.ajax({
@@ -74,7 +83,7 @@ function displayFood() {
 
 //changes the state of images so that on click, will move/stop
 function imageAnimate() {
-    console.log('foodimg');
+    console.log('Animate');
     var state = $(this).attr("data-state");
 
 
@@ -85,14 +94,18 @@ function imageAnimate() {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
     }
-    };
+}
 
 
 
 // when food button is clicked, displayfood function happens and pulls photos from giphy
 $(document).on("click", ".foodSearch", displayFood);
 $(document).on("click", ".foodimg", imageAnimate);
+$(document).on("click", "#addfood", addButton);
+var pp=0;
+console.log(pp++);
 renderButtons();
+console.log(pp++);
 
 
 //dynamically create buttons
