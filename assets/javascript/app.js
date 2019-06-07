@@ -1,5 +1,5 @@
 var foodshown = ["spaghetti", "fried chicken", "sushi", "pizza", "carrot", "burrito", "hot dog", "spring roll", "dim sum", "lumpia", "salad", "chili", "samosa", "lasagna", "ramen", "milk tea", "bacon", "udon", "wine", "potato", "french fries", "hamburger", "braised meat", "pho", "meatloaf", "sandwich", "cake", "dumpling", "curry", "lassi", "ice cream", "pudding", "taco"];
-// var foodshown = [];
+renderButtons();
 
 // make the buttons add to the button area
 function renderButtons() {
@@ -8,28 +8,24 @@ function renderButtons() {
 
     for (var i = 0; i < foodshown.length; i++) {
         var newButton = $("<button>");
-        newButton.addClass("foodSearch");
+        newButton.addClass("fooddisplay");
         newButton.attr("data-name", foodshown[i]);
         newButton.text(foodshown[i]);
         //alert(newButton);
         $("#foodbuttons").append(newButton);
         console.log('for renderButtons');
     }
-
 }
 
 //when submit button is clicked, use keyword value to create button
-function addButton () {
-    var foodSearch = $("#foodSearch").val().trim();
+function addButton() {
+    event.preventDefault();
+    var foodFound = $("#foodSearch").val().trim();
 
-    foodshown.push(foodSearch);
-    //alert('here' + foodshown)
+    foodshown.push(foodFound);
     console.log("addButton");
-    // var foodSearch = $("#foodSearch").val().trim();
-
-    // foodshown.push(foodSearch);
     renderButtons();
-  
+
 }
 
 // call on giphy for keyword and corresponding rating
@@ -90,51 +86,14 @@ function imageAnimate() {
     if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
-    } else  {
+    } else {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
     }
 }
 
-
-
 // when food button is clicked, displayfood function happens and pulls photos from giphy
-$(document).on("click", ".foodSearch", displayFood);
+$(document).on("click", ".fooddisplay", displayFood);
 $(document).on("click", ".foodimg", imageAnimate);
 $(document).on("click", "#addfood", addButton);
-var pp=0;
-console.log(pp++);
-renderButtons();
-console.log(pp++);
 
-
-//dynamically create buttons
-
-// have a search bar with a value in it, so that the value can be retrieved
-
-//link to jquery
-
-//get the query url 
-
-// url for value and plug in key 
-
-//call on ajax
-
-// create div so that it will not stick together 
-
-// grab the rating
-
-// give class attribute image source 
-
-//call on giphy to pull images
-
-//stle page
-
-
-
-
-
-
-        // $(document).on("click", "food-button", displayFood);
-        //renderButtons();
-        //displayFood();
