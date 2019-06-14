@@ -28,8 +28,9 @@ h1 {
 #foodform {
     font-family: 'Poppins', sans-serif;
     right: 5%;
-    margin-top: -5%;
-    padding: 10%;
+    
+    margin-right: 5%;
+    padding: 4%;
     position: fixed;
 }
 
