@@ -34,7 +34,7 @@ function displayFood() {
     //Storing the value in the search input
     var foodSearch = $(this).attr("data-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + foodSearch + "&api_key=xldevyUFda5jgS3659tn5rBHaORqZjBi&limit=10";
     //console.log(queryURL);
 
     $.ajax({

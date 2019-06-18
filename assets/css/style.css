@@ -1,5 +1,7 @@
 #foodbuttons {
     font-family: 'Poppins', sans-serif;
+    position: fixed;
+    align-content: center;
 }
 
 body {
